@@ -14,4 +14,4 @@ class PostsAPI(BaseAPI):
         return self.put(f"/posts/{post_id}", payload)
 
     def delete(self, post_id):
-        return self.delete(f"/posts/{post_id}")
+        return super().delete(f"/posts/{post_id}")
