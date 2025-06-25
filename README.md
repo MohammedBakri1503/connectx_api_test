@@ -1,4 +1,4 @@
-# 🧪 ConnectX Junior Automation Engineer – API Testing Exercise
+#  ConnectX Junior Automation Engineer – API Testing Exercise
 
 This project demonstrates a structured approach to automated testing of RESTful APIs using [JSONPlaceholder](https://jsonplaceholder.typicode.com/) — a free online REST API for testing and prototyping. The main goal is to validate core CRUD functionality, response behavior, and edge cases using `pytest` and `requests`.
 
@@ -91,7 +91,7 @@ tests\posts_update_test.py ............                                         
 
 ---
 
-## 🧠 Challenges & Interesting Findings
+## Challenges & Interesting Findings
 
 ###  Challenges Faced
 
