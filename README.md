@@ -1,69 +1,83 @@
 # 🧪 ConnectX Junior Automation Engineer – API Testing Exercise
 
-This project demonstrates an automated testing strategy for RESTful APIs using the [JSONPlaceholder](https://jsonplaceholder.typicode.com/) fake API. The focus is on validating core CRUD functionality, edge cases, and verifying proper API behavior using Python with `requests` and `pytest`.
+This project demonstrates a structured approach to automated testing of RESTful APIs using [JSONPlaceholder](https://jsonplaceholder.typicode.com/) — a free online REST API for testing and prototyping. The main goal is to validate core CRUD functionality, response behavior, and edge cases using `pytest` and `requests`.
 
 ---
 
-## ✅ Objective
+##  Objective
 
-To test the `/posts` endpoint by validating:
+To test the `/posts` endpoint for:
 
-- Response structure
-- Status codes
-- Data integrity
-- Proper handling of positive and negative test scenarios
-- RESTful CRUD operations
-
----
-
-## 🧠 Testing Strategy & Objectives
-
-**Test Plan Overview:**
-
-We focus on verifying basic API behavior through:
-
-1. **Positive Testing** – Valid inputs and expected outcomes  
-2. **Negative Testing** – Invalid input (e.g., non-existent ID, missing fields)  
-3. **Data Validation** – Ensuring the API returns fields with correct types and values  
-4. **CRUD Coverage**:
-   - `GET /posts` – List all posts
-   - `GET /posts/{id}` – Retrieve a single post
-   - `POST /posts` – Create a new post
-   - `PUT /posts/{id}` – Update an existing post
-   - `DELETE /posts/{id}` – Delete a post
-
-**Assertions include:**
-
-- Status codes (200, 201, 404, 500)
-- Response schema structure
-- Required fields (`id`, `title`, `body`, `userId`)
-- Type checking (e.g., strings, integers)
+- Correct **HTTP status codes**
+- Proper **response structure**
+- **Data integrity** and consistency
+- Coverage of both **positive** and **negative** test scenarios
+- Full **CRUD operations**:
+  - `GET /posts` – List all posts
+  - `GET /posts/{id}` – Retrieve a specific post
+  - `POST /posts` – Create a new post
+  - `PUT /posts/{id}` – Update a post
+  - `DELETE /posts/{id}` – Delete a post
 
 ---
 
-## 🧰 Tools & Libraries Used
+##  Testing Strategy
 
-- [`requests`](https://pypi.org/project/requests/): To send HTTP requests
-- [`pytest`](https://docs.pytest.org/): To define and run test cases
+### Test Approach
+
+This project includes comprehensive test coverage for:
+
+-  **Positive Tests** – Valid inputs returning expected results  
+-  **Negative Tests** – Invalid data types, IDs, missing fields, malformed JSON  
+-  **Data Validation** – Verifying the presence and types of response fields  
+-  **Edge Cases** – Empty payloads, null IDs, and unexpected fields
+
+### Key Assertions
+
+- Status codes: `200 OK`, `201 Created`, `404 Not Found`, `500 Internal Server Error`
+- JSON schema: presence of fields like `id`, `title`, `body`, `userId`
+- Correct data types: integers for `id` and `userId`, strings for `title` and `body`
 
 ---
 
-## 📦 Setup Instructions
+##  Tech Stack
 
-### 1. Clone the repository
+| Tool             | Purpose                       |
+|------------------|-------------------------------|
+| `pytest`         | Test runner                   |
+| `requests`       | Sending HTTP requests         |
+| `JSONPlaceholder`| Fake REST API for testing     |
+
+---
+
+##  Setup Instructions
+
+### 1.  Clone the Repository
 
 ```bash
 git clone https://github.com/yourusername/connectx-api-tests.git
 cd connectx-api-tests
+```
 
+### 2.  Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
+### 3.  Run the Tests
+
+```bash 
 pytest
+```
 
+---
 
+##  Sample Test Output
 
+```bash
 PS C:\Users\lennovo\Desktop\connectx_api_test> pytest
-==============================================================================
+============================================================================== test session starts ==============================================================================
 platform win32 -- Python 3.7.6, pytest-7.4.3
 collected 31 items
 
@@ -73,35 +87,38 @@ tests\posts_get_test.py .......                                                 
 tests\posts_update_test.py ............                                                                                [100%]
 
 ============================================================================== 31 passed in 8.27s ==============================================================================
+```
 
+---
 
+## 🧠 Challenges & Interesting Findings
 
-🧠 Challenges & Interesting Findings
-🔍 Challenges Faced
-Unrealistic API Behavior:
-JSONPlaceholder is a mock API that does not validate request payloads. It accepts:
+###  Challenges Faced
 
-Missing required fields
+- **Unrealistic API Behavior**  
+  JSONPlaceholder is a mock API, so it doesn't validate data. It accepts:
+  - Payloads missing required fields
+  - Wrong data types (e.g., `title` as number, `userId` as string)
+  - `None` or invalid JSON like plain strings
 
-Incorrect data types
+- **Edge Case Behavior**  
+  - `POST {}` returns 201 Created, even if no meaningful fields are provided
+  - `GET /posts/""` returns the entire post list, not an error
+  - Many invalid cases return 200 OK or unexpected responses
 
-None or invalid JSON (like plain strings)
+- **Error Handling Limitations**  
+  The API often returns 200 OK for cases that would realistically yield `400 Bad Request` or `500 Internal Server Error` in real applications.
 
-This made negative testing non-standard, requiring flexible assertions.
+###  Interesting Findings
 
-Ambiguous Edge Case Responses:
-Some scenarios (e.g., GET /posts/"") returned the full list instead of an error.
-Posting an empty dict ({}) still resulted in a 201 Created with an auto-generated ID.
+- **Echo Behavior**  
+  JSONPlaceholder **echoes extra or unknown fields** back in the response. Real-world APIs would reject or silently ignore them.
 
-Limited Error Handling:
-The API often returned 200 OK even for inputs that would realistically cause 400 Bad Request or 500 Internal Server Error.
+- **Static ID Generation**  
+  All new posts created via `POST` return an `id` of `101`, regardless of how many times you call the endpoint — proving there's no persistent storage.
 
-🌟 Interesting Findings
-Echo Behavior:
-JSONPlaceholder echoes back extra/unexpected fields in the response — unlike real APIs which usually reject or ignore them.
+- **Hardcoded Dataset**  
+  The `GET /posts` response always contains the same 100 static items. So test cases must not assume dynamic changes like deletions or updates persist.
 
-Static ID Generation:
-Every new post created using POST gets an id of 101, regardless of payload. This shows there's no backend persistence.
+---
 
-Hardcoded Data:
-The data in GET /posts is static — so data validation tests must account for that and not assume dynamic state changes.
