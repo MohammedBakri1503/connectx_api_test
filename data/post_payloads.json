@@ -1,0 +1,11 @@
+{
+  "valid_post": {
+    "title": "Hello API",
+    "body": "This is a valid post body.",
+    "userId": 1
+  },
+  "invalid_post": {
+    "title": 12345,
+    "userId": "invalid_string"
+  }
+}
