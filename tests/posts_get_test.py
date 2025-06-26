@@ -1,4 +1,5 @@
 import pytest
+from constants.http_status import OK, CREATED, NOT_FOUND, INTERNAL_SERVER_ERROR
 
 class TestPostsGet:
     def test_get_all_posts(self, posts_api):

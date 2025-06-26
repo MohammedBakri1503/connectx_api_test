@@ -1,4 +1,5 @@
 import pytest
+from constants.http_status import OK, CREATED, NOT_FOUND, INTERNAL_SERVER_ERROR
 
 class TestPostsUpdate:
 
