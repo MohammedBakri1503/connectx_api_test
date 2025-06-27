@@ -1,0 +1,97 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"
+        Negative test: invalid types. JSONPlaceholder still accepts and returns 200.
+        ","358","test_update_post_with_invalid_data","tests","Fri Jun 27 12:15:57 IDT 2025","passed","Fri Jun 27 12:15:58 IDT 2025","TestPostsUpdate","posts_update_test","",""
+"","74","test_get_all_posts","tests","Fri Jun 27 12:15:56 IDT 2025","passed","Fri Jun 27 12:15:56 IDT 2025","TestPostsGet","posts_get_test","",""
+"
+        Negative test: Empty ID should return 404 or 500.
+        ","203","test_delete_post_with_empty_id","tests","Fri Jun 27 12:15:55 IDT 2025","passed","Fri Jun 27 12:15:55 IDT 2025","TestPostsDelete","posts_delete_test","",""
+"
+        Stress test: Send a very large body string.
+        JSONPlaceholder accepts large payloads and returns them as-is.
+        ","512","test_create_post_with_large_payload","tests","Fri Jun 27 12:15:53 IDT 2025","passed","Fri Jun 27 12:15:54 IDT 2025","TestPostsCreate","posts_create_test","",""
+"
+        Negative test: None as ID is invalid.
+        Expecting 404 or 500 depending on the backend.
+        ","203","test_delete_post_with_none_id","tests","Fri Jun 27 12:15:55 IDT 2025","passed","Fri Jun 27 12:15:56 IDT 2025","TestPostsDelete","posts_delete_test","",""
+"
+        Edge case: Sending an empty dict still returns 201 and generates only an ID.
+        ","721","test_create_post_with_empty_payload","tests","Fri Jun 27 12:15:52 IDT 2025","passed","Fri Jun 27 12:15:53 IDT 2025","TestPostsCreate","posts_create_test","",""
+"
+        Negative test: update a post with ID that doesn't exist.
+        JSONPlaceholder returns 500.
+        ","191","test_update_non_existent_post","tests","Fri Jun 27 12:15:58 IDT 2025","passed","Fri Jun 27 12:15:58 IDT 2025","TestPostsUpdate","posts_update_test","",""
+"
+        Missing required fields like 'body' or 'userId'.
+        JSONPlaceholder still returns 201 with only the fields you provide.
+        ","600","test_create_post_without_required_fields","tests","Fri Jun 27 12:15:51 IDT 2025","passed","Fri Jun 27 12:15:51 IDT 2025","TestPostsCreate","posts_create_test","",""
+"","93","test_get_post_valid_id_1","tests","Fri Jun 27 12:15:56 IDT 2025","passed","Fri Jun 27 12:15:56 IDT 2025","TestPostsGet","posts_get_test","",""
+"","63","test_get_post_valid_id_101","tests","Fri Jun 27 12:15:56 IDT 2025","passed","Fri Jun 27 12:15:56 IDT 2025","TestPostsGet","posts_get_test","",""
+"
+        Empty string ID returns 404.
+        ","801","test_update_post_with_empty_id","tests","Fri Jun 27 12:16:00 IDT 2025","passed","Fri Jun 27 12:16:01 IDT 2025","TestPostsUpdate","posts_update_test","",""
+"
+        None as ID returns 500.
+        ","610","test_update_post_with_none_id","tests","Fri Jun 27 12:16:01 IDT 2025","passed","Fri Jun 27 12:16:01 IDT 2025","TestPostsUpdate","posts_update_test","",""
+"
+        Positive data integrity test:
+        Ensures that a known subset of records exists in the full list returned from GET /posts.
+        ","63","test_all_posts_contains_expected_subset","tests","Fri Jun 27 12:15:56 IDT 2025","passed","Fri Jun 27 12:15:56 IDT 2025","TestPostsGet","posts_get_test","",""
+"
+        Positive test: update the body of a post.
+        ","465","test_update_post_body","tests","Fri Jun 27 12:15:57 IDT 2025","passed","Fri Jun 27 12:15:57 IDT 2025","TestPostsUpdate","posts_update_test","",""
+"
+        Positive test: update the title of a post.
+        ","455","test_update_post_title","tests","Fri Jun 27 12:15:56 IDT 2025","passed","Fri Jun 27 12:15:57 IDT 2025","TestPostsUpdate","posts_update_test","",""
+"
+        Non-integer ID (""abc"") returns 500.
+        ","572","test_update_post_with_non_integer_id","tests","Fri Jun 27 12:15:59 IDT 2025","passed","Fri Jun 27 12:16:00 IDT 2025","TestPostsUpdate","posts_update_test","",""
+"
+        Extra field: JSONPlaceholder includes unknown fields in response.
+        ","205","test_update_post_with_extra_fields","tests","Fri Jun 27 12:15:59 IDT 2025","passed","Fri Jun 27 12:15:59 IDT 2025","TestPostsUpdate","posts_update_test","",""
+"","56","test_get_post_none_id","tests","Fri Jun 27 12:15:56 IDT 2025","passed","Fri Jun 27 12:15:56 IDT 2025","TestPostsGet","posts_get_test","",""
+"
+        Bad JSON: string instead of dict. JSONPlaceholder throws 500.
+        ","191","test_update_post_with_invalid_json","tests","Fri Jun 27 12:15:59 IDT 2025","passed","Fri Jun 27 12:15:59 IDT 2025","TestPostsUpdate","posts_update_test","",""
+"
+        Technically invalid: `None` is not valid JSON.
+        JSONPlaceholder accepts it and still returns 201 with ID (for demo/testing).
+        ","408","test_create_post_with_none_payload","tests","Fri Jun 27 12:15:53 IDT 2025","passed","Fri Jun 27 12:15:53 IDT 2025","TestPostsCreate","posts_create_test","",""
+"
+        Edge case: empty dict. Still returns 200.
+        ","481","test_update_post_with_empty_payload","tests","Fri Jun 27 12:15:58 IDT 2025","passed","Fri Jun 27 12:15:58 IDT 2025","TestPostsUpdate","posts_update_test","",""
+"
+        Positive test: Delete an existing post with another valid ID.
+        JSONPlaceholder returns 200 OK with an empty body or 204 No Content.
+        ","218","test_delete_existing_post_alt","tests","Fri Jun 27 12:15:54 IDT 2025","passed","Fri Jun 27 12:15:54 IDT 2025","TestPostsDelete","posts_delete_test","",""
+"
+        Edge case: JSONPlaceholder still returns 201 even with invalid data.
+        In a real API, this would be 400 Bad Request.
+        ","607","test_create_invalid_post","tests","Fri Jun 27 12:15:50 IDT 2025","passed","Fri Jun 27 12:15:51 IDT 2025","TestPostsCreate","posts_create_test","",""
+"
+        Invalid test: None as payload results in 200 (unexpected).
+        ","467","test_update_post_with_none_payload","tests","Fri Jun 27 12:15:58 IDT 2025","passed","Fri Jun 27 12:15:59 IDT 2025","TestPostsUpdate","posts_update_test","",""
+"","60","test_get_post_invalid_id","tests","Fri Jun 27 12:15:56 IDT 2025","passed","Fri Jun 27 12:15:56 IDT 2025","TestPostsGet","posts_get_test","",""
+"","53","test_get_post_empty_id","tests","Fri Jun 27 12:15:56 IDT 2025","passed","Fri Jun 27 12:15:56 IDT 2025","TestPostsGet","posts_get_test","",""
+"
+        Send extra/unexpected fields in payload.
+        JSONPlaceholder will echo them back (not realistic for production APIs).
+        ","599","test_create_post_with_extra_fields","tests","Fri Jun 27 12:15:51 IDT 2025","passed","Fri Jun 27 12:15:52 IDT 2025","TestPostsCreate","posts_create_test","",""
+"Positive test: creating a post with valid data should return 201 and the same title.","760","test_create_valid_post","tests","Fri Jun 27 12:15:49 IDT 2025","passed","Fri Jun 27 12:15:50 IDT 2025","TestPostsCreate","posts_create_test","",""
+"
+        Edge case: Try to delete a non-existent post.
+        JSONPlaceholder may return 200 with empty body, or 404.
+        ","460","test_delete_non_existent_post","tests","Fri Jun 27 12:15:54 IDT 2025","passed","Fri Jun 27 12:15:55 IDT 2025","TestPostsDelete","posts_delete_test","",""
+"
+        Positive test: Delete an existing post.
+        JSONPlaceholder returns 200 OK with an empty body or 204 No Content.
+        ","477","test_delete_existing_post","tests","Fri Jun 27 12:15:54 IDT 2025","passed","Fri Jun 27 12:15:54 IDT 2025","TestPostsDelete","posts_delete_test","",""
+"","86","test_get_post_valid_id_100","tests","Fri Jun 27 12:15:56 IDT 2025","passed","Fri Jun 27 12:15:56 IDT 2025","TestPostsGet","posts_get_test","",""
+"
+        Stress test: large body text.
+        ","217","test_update_post_with_large_payload","tests","Fri Jun 27 12:15:59 IDT 2025","passed","Fri Jun 27 12:15:59 IDT 2025","TestPostsUpdate","posts_update_test","",""
+"
+        Negative test: Invalid ID (string instead of number).
+        Expected 404 or 500 depending on backend.
+        ","490","test_delete_post_with_invalid_id","tests","Fri Jun 27 12:15:55 IDT 2025","passed","Fri Jun 27 12:15:55 IDT 2025","TestPostsDelete","posts_delete_test","",""
+"","55","test_get_post_non_integer_id","tests","Fri Jun 27 12:15:56 IDT 2025","passed","Fri Jun 27 12:15:56 IDT 2025","TestPostsGet","posts_get_test","",""
