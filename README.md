@@ -27,10 +27,10 @@ To test the `/posts` endpoint for:
 
 This project includes comprehensive test coverage for:
 
--  **Positive Tests** – Valid inputs returning expected results  
--  **Negative Tests** – Invalid data types, IDs, missing fields, malformed JSON  
--  **Data Validation** – Verifying the presence and types of response fields  
--  **Edge Cases** – Empty payloads, null IDs, and unexpected fields
+- **Positive Tests** – Valid inputs returning expected results  
+- **Negative Tests** – Invalid data types, IDs, missing fields, malformed JSON  
+- **Data Validation** – Verifying the presence and types of response fields  
+- **Edge Cases** – Empty payloads, null IDs, and unexpected fields
 
 ### Key Assertions
 
@@ -40,13 +40,14 @@ This project includes comprehensive test coverage for:
 
 ---
 
-##  Tech Stack
+## 🛠 Tech Stack
 
 | Tool             | Purpose                       |
 |------------------|-------------------------------|
 | `pytest`         | Test runner                   |
 | `requests`       | Sending HTTP requests         |
 | `JSONPlaceholder`| Fake REST API for testing     |
+| `allure-pytest`  | Test reporting and visualization |
 
 ---
 
@@ -65,10 +66,42 @@ cd connectx-api-tests
 pip install -r requirements.txt
 ```
 
-### 3.  Run the Tests
+If using Allure for reporting, also install:
 
-```bash 
+```bash
+pip install allure-pytest
+```
+
+> You also need to [download Allure CLI](https://docs.qameta.io/allure/#_get_started) and add it to your system PATH.
+
+---
+
+##  Run the Tests
+
+```bash
 pytest
+```
+
+---
+
+##  Generate Allure Report
+
+### Step 1: Run Tests with Allure
+
+```bash
+pytest --alluredir=allure-results
+```
+
+### Step 2: Generate the Report
+
+```bash
+allure generate allure-results --clean -o allure-report
+```
+
+### Step 3: Open the Report in Browser
+
+```bash
+allure open allure-report
 ```
 
 ---
@@ -76,8 +109,6 @@ pytest
 ##  Sample Test Output
 
 ```bash
-PS C:\Users\lennovo\Desktop\connectx_api_test> pytest
-============================================================================== test session starts ==============================================================================
 platform win32 -- Python 3.7.6, pytest-7.4.3
 collected 31 items
 
@@ -91,34 +122,33 @@ tests\posts_update_test.py ............                                         
 
 ---
 
-## Challenges & Interesting Findings
+##  Challenges & Interesting Findings
 
-###  Challenges Faced
+###  Challenges
 
 - **Unrealistic API Behavior**  
   JSONPlaceholder is a mock API, so it doesn't validate data. It accepts:
   - Payloads missing required fields
-  - Wrong data types (e.g., `title` as number, `userId` as string)
-  - `None` or invalid JSON like plain strings
+  - Wrong data types
+  - `None` or invalid JSON
 
 - **Edge Case Behavior**  
-  - `POST {}` returns 201 Created, even if no meaningful fields are provided
-  - `GET /posts/""` returns the entire post list, not an error
-  - Many invalid cases return 200 OK or unexpected responses
+  - `POST {}` returns 201 Created
+  - `GET /posts/""` returns the full list, not an error
+  - Invalid requests often return 200 OK
 
-- **Error Handling Limitations**  
-  The API often returns 200 OK for cases that would realistically yield `400 Bad Request` or `500 Internal Server Error` in real applications.
+- **Error Handling Gaps**  
+  The API returns 200 even when 400 or 500 would be expected in production.
 
-###  Interesting Findings
+### 🌟 Interesting Findings
 
 - **Echo Behavior**  
-  JSONPlaceholder **echoes extra or unknown fields** back in the response. Real-world APIs would reject or silently ignore them.
+  JSONPlaceholder returns unknown fields in the response.
 
 - **Static ID Generation**  
-  All new posts created via `POST` return an `id` of `101`, regardless of how many times you call the endpoint — proving there's no persistent storage.
+  Every post created with `POST` returns `id = 101`.
 
-- **Hardcoded Dataset**  
-  The `GET /posts` response always contains the same 100 static items. So test cases must not assume dynamic changes like deletions or updates persist.
+- **Immutable Data**  
+  `GET /posts` always returns the same 100 static records.
 
 ---
-
