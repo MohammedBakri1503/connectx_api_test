@@ -140,7 +140,7 @@ tests\posts_update_test.py ............                                         
 - **Error Handling Gaps**  
   The API returns 200 even when 400 or 500 would be expected in production.
 
-### 🌟 Interesting Findings
+###  Interesting Findings
 
 - **Echo Behavior**  
   JSONPlaceholder returns unknown fields in the response.
