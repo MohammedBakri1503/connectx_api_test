@@ -25,7 +25,7 @@ class TestPostsUpdate:
 
     def test_update_post_with_invalid_data(self, posts_api, invalid_post_data):
         """
-        Negative test: invalid types. JSONPlaceholder still accepts and returns 200.
+        Negative test: invalid types. JSONPlaceholder still accepts and returns 200 (unexpected).
         """
         res = posts_api.update(1, invalid_post_data)
         assert res.status_code == OK
@@ -35,7 +35,7 @@ class TestPostsUpdate:
     def test_update_non_existent_post(self, posts_api, valid_post_data):
         """
         Negative test: update a post with ID that doesn't exist.
-        JSONPlaceholder returns 500.
+        JSONPlaceholder returns 500 (expected 404 Not found).
         """
         res = posts_api.update(9999, valid_post_data)
         assert res.status_code == INTERNAL_SERVER_ERROR
@@ -58,7 +58,7 @@ class TestPostsUpdate:
 
     def test_update_post_with_invalid_json(self, posts_api):
         """
-        Bad JSON: string instead of dict. JSONPlaceholder throws 500.
+        Bad JSON: string instead of dict. JSONPlaceholder throws 500 (expected 400 bad request).
         """
         res = posts_api.update(1, "Invalid JSON")
         assert res.status_code == INTERNAL_SERVER_ERROR
@@ -96,7 +96,7 @@ class TestPostsUpdate:
 
     def test_update_post_with_none_id(self, posts_api, valid_post_data):
         """
-        None as ID returns 500.
+        None as ID returns 500 (expected bad request).
         """
         res = posts_api.update(None, valid_post_data)
         assert res.status_code == INTERNAL_SERVER_ERROR

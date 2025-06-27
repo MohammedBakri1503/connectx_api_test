@@ -12,7 +12,7 @@ class TestPostsCreate:
     def test_create_invalid_post(self, posts_api, invalid_post_data):
         """
         Edge case: JSONPlaceholder still returns 201 even with invalid data.
-        In a real API, this would be 400 Bad Request.
+        In a real API, this would be 400 Bad Request (Not good).
         """
         res = posts_api.create(invalid_post_data)
         assert res.status_code == CREATED

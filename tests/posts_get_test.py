@@ -53,7 +53,7 @@ class TestPostsGet:
 
     def test_get_post_valid_id_101(self, posts_api):
         res = posts_api.get_by_id(101)
-        assert res.status_code == NOT_FOUND  # JSONPlaceholder returns 404 for IDs > 100
+        assert res.status_code == NOT_FOUND  # JSONPlaceholder returns 404 (Not found) for IDs > 100
         assert res.json() == {}
 
     def test_get_post_invalid_id(self, posts_api):
@@ -70,7 +70,7 @@ class TestPostsGet:
         res = posts_api.get_by_id("")
         assert res.status_code == OK
         data = res.json()
-        assert isinstance(data, list)  # It returns a list, not an empty dict
+        assert isinstance(data, list)  # JSONPlaceholder returns an empty list for empty ID
         assert len(data) > 0
 
     def test_get_post_none_id(self, posts_api):

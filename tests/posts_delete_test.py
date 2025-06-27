@@ -34,7 +34,7 @@ class TestPostsDelete:
         JSONPlaceholder may return 200 with empty body, or 404.
         """
         res = posts_api.delete(9999)
-        assert res.status_code in [OK, NOT_FOUND]
+        assert res.status_code == OK
 
         if res.status_code == OK:
             data = res.json()
@@ -48,7 +48,7 @@ class TestPostsDelete:
         Expected 404 or 500 depending on backend.
         """
         res = posts_api.delete("abc")
-        assert res.status_code in [OK, NOT_FOUND, INTERNAL_SERVER_ERROR]
+        assert res.status_code == OK  # JSONPlaceholder returns 200 for invalid IDs (unexpected) Bad request expected
 
         if res.status_code == OK:
             data = res.json()
@@ -61,7 +61,7 @@ class TestPostsDelete:
         Negative test: Empty ID should return 404 or 500.
         """
         res = posts_api.delete("")
-        assert res.status_code in [OK, NOT_FOUND, INTERNAL_SERVER_ERROR]
+        assert res.status_code == NOT_FOUND  # JSONPlaceholder returns 404 for empty ID
 
         if res.status_code == OK:
             data = res.json()
@@ -72,9 +72,9 @@ class TestPostsDelete:
     def test_delete_post_with_none_id(self, posts_api):
         """
         Negative test: None as ID is invalid.
-        Expecting 404 or 500 depending on the backend.
+        Expecting 404 or 500 depending on the backend but got 200 (unexpeted).
         """
         res = posts_api.delete(None)
-        assert res.status_code in [OK, INTERNAL_SERVER_ERROR]
+        assert res.status_code == OK
 
         assert isinstance(res.json(), dict)
