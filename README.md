@@ -1,6 +1,6 @@
-#  ConnectX Junior Automation Engineer – API Testing Exercise
+# ConnectX Junior Automation Engineer – API Testing Exercise
 
-This project demonstrates a structured approach to automated testing of RESTful APIs using [JSONPlaceholder](https://jsonplaceholder.typicode.com/) — a free online REST API for testing and prototyping. The main goal is to validate core CRUD functionality, response behavior, and edge cases using `pytest` and `requests`.
+This project demonstrates a structured approach to automated testing of RESTful APIs using [JSONPlaceholder](https://jsonplaceholder.typicode.com/) — a free online REST API for testing and prototyping. The main goal is to validate core CRUD functionality, response behavior, and edge cases using `pytest`, `requests`, and Postman collections.
 
 ---
 
@@ -32,28 +32,50 @@ This project includes comprehensive test coverage for:
 - **Data Validation** – Verifying the presence and types of response fields  
 - **Edge Cases** – Empty payloads, null IDs, and unexpected fields
 
-### Key Assertions
+---
 
-- Status codes: `200 OK`, `201 Created`, `404 Not Found`, `500 Internal Server Error`
-- JSON schema: presence of fields like `id`, `title`, `body`, `userId`
-- Correct data types: integers for `id` and `userId`, strings for `title` and `body`
+##  Test Types & Tools
+
+| Tool             | Purpose                                        |
+|------------------|------------------------------------------------|
+| `pytest`         | Python test runner                             |
+| `requests`       | Python HTTP client                             |
+| `JSONPlaceholder`| Mock REST API                                  |
+| `allure-pytest`  | Test report generation for Python tests        |
+| `Postman`        | Manual and automated API testing with scripts  |
 
 ---
 
-## 🛠 Tech Stack
+##  Postman Test Collection
 
-| Tool             | Purpose                       |
-|------------------|-------------------------------|
-| `pytest`         | Test runner                   |
-| `requests`       | Sending HTTP requests         |
-| `JSONPlaceholder`| Fake REST API for testing     |
-| `allure-pytest`  | Test reporting and visualization |
+In addition to the Python tests, a Postman collection was created to test the same `/posts` CRUD operations:
 
----
+###  Files
 
-##  Setup Instructions
+- `postman/ConnectX_Posts_Test.postman_collection.json` – The main Postman test collection
 
-### 1.  Clone the Repository
+###  Postman Test Coverage
+
+-  Create Post – Tests valid, empty, incomplete, and malformed payloads
+-  Get Post – Valid, invalid, and empty ID
+-  Update Post – With valid, empty, or large payload
+-  Delete Post – Existing, non-existent, or invalid ID
+
+### ▶ How to Run Postman Tests
+
+#### Option 1: Run via Postman UI
+
+1. Open [Postman in browser](https://web.postman.co) or the desktop app
+2. Import the collection JSON file
+3. Click **"Run Collection"** (using Collection Runner)
+4. Optionally select environment
+5. Click **"Run Tests"**
+
+
+
+##  Python Setup Instructions
+
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/MohammedBakri1503/connectx_api_test?tab=readme-ov-file
@@ -63,22 +85,19 @@ cd connectx-api-tests
 ```
 
 
-### 2.  Install Dependencies
+### 2. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-If using Allure for reporting, also install:
+If using Allure:
 
 ```bash
 pip install allure-pytest
 ```
 
-
----
-
-##  Run the Tests
+### 3. Run Python Tests
 
 ```bash
 pytest
@@ -86,21 +105,21 @@ pytest
 
 ---
 
-##  Generate Allure Report
+##  Generate Allure Report (for Python tests)
 
-### Step 1: Run Tests with Allure
+### Step 1: Run with Allure
 
 ```bash
 pytest --alluredir=allure-results
 ```
 
-### Step 2: Generate the Report
+### Step 2: Generate Report
 
 ```bash
 allure generate allure-results --clean -o allure-report
 ```
 
-### Step 3: Open the Report in Browser
+### Step 3: Open Report in Browser
 
 ```bash
 allure open allure-report
@@ -130,27 +149,27 @@ tests\posts_update_test.py ............                                         
 
 - **Unrealistic API Behavior**  
   JSONPlaceholder is a mock API, so it doesn't validate data. It accepts:
-  - Payloads missing required fields
+  - Missing required fields
   - Wrong data types
-  - `None` or invalid JSON
+  - Empty or `None` values
 
-- **Edge Case Behavior**  
+- **Edge Case Responses**  
   - `POST {}` returns 201 Created
-  - `GET /posts/""` returns the full list, not an error
-  - Invalid requests often return 200 OK
+  - `GET /posts/""` returns the full list
+  - Invalid inputs often return `200 OK` or behave inconsistently
 
-- **Error Handling Gaps**  
-  The API returns 200 even when 400 or 500 would be expected in production.
+- **No State Persistence**  
+  Updates and deletions don’t affect data due to mock nature.
 
 ###  Interesting Findings
 
 - **Echo Behavior**  
-  JSONPlaceholder returns unknown fields in the response.
+  Extra fields in requests are echoed back
 
-- **Static ID Generation**  
-  Every post created with `POST` returns `id = 101`.
+- **Static ID**  
+  All POST responses use ID `101`
 
-- **Immutable Data**  
-  `GET /posts` always returns the same 100 static records.
+- **Hardcoded Dataset**  
+  `GET /posts` always returns the same 100 items
 
 ---
