@@ -176,18 +176,19 @@ tests\posts_update_test.py ............                                         
 
 
 
--**Suggestions for Improving the Tested API**
-Proper Input Validation
+### Suggestions for Improving the Tested API**
+
+-**Proper Input Validation**
 Validate that required fields are present and data types are correct (e.g. string title, integer userId).
 
-Accurate Status Codes
+-**Accurate Status Codes**
 Return 400 Bad Request for invalid JSON or payloads, 404 Not Found for invalid IDs, and 500 for true server errors.
 
-Unique ID Handling and Persistence
+-**Unique ID Handling and Persistence**
 Implement real or simulated storage so that new posts get unique IDs and updates/deletes persist.
 
-Standard Error Responses
+-**Standard Error Responses**
 Respond with structured JSON error messages like:
 
-Rate Limiting & Authentication
+-**Rate Limiting & Authentication**
 Add API key authentication and throttle excessive requests to prevent abuse.
