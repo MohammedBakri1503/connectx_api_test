@@ -56,9 +56,12 @@ This project includes comprehensive test coverage for:
 ### 1.  Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/connectx-api-tests.git
+git clone https://github.com/MohammedBakri1503/connectx_api_test?tab=readme-ov-file
+```
+```bash
 cd connectx-api-tests
 ```
+
 
 ### 2.  Install Dependencies
 
@@ -72,7 +75,6 @@ If using Allure for reporting, also install:
 pip install allure-pytest
 ```
 
-> You also need to [download Allure CLI](https://docs.qameta.io/allure/#_get_started) and add it to your system PATH.
 
 ---
 
