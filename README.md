@@ -61,7 +61,7 @@ In addition to the Python tests, a Postman collection was created to test the sa
 -  Update Post – With valid, empty, or large payload
 -  Delete Post – Existing, non-existent, or invalid ID
 
-### ▶ How to Run Postman Tests
+###  How to Run Postman Tests
 
 ####  Run via Postman UI
 
