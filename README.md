@@ -68,8 +68,7 @@ In addition to the Python tests, a Postman collection was created to test the sa
 1. Open [Postman in browser](https://web.postman.co) or the desktop app
 2. Import the collection JSON file
 3. Click **"Run Collection"** (using Collection Runner)
-4. Optionally select environment
-5. Click **"Run Tests"**
+4. Click **"Run Tests"**
 
 
 
